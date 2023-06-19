@@ -1,0 +1,14 @@
+:root {
+  --primary: #2b2e4a;
+  --secondary: #e84545;
+  --third: #903749;
+  --fourth: #53354a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
