@@ -9,4 +9,7 @@ export interface CartContextType {
   addFood: (food: FoodType) => void;
   removeFood: (food: FoodType) => void;
   resetCart: () => void;
+  getTotalAmount: () => number;
+  getTotaoPrice: () => string;
+  getAmount: (food: FoodType) => number;
 }

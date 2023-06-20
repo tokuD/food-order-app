@@ -9,6 +9,9 @@ const CartContext = React.createContext<CartContextType>({
   addFood: (_) => {},
   removeFood: (_) => {},
   resetCart: () => {},
+  getTotalAmount: () => 0,
+  getTotaoPrice: () => "",
+  getAmount: (_) => 0,
 });
 
 type Payload = {
@@ -57,6 +60,7 @@ export const CartProvider = (props: { children: React.ReactNode }) => {
     foodsInCartReducer,
     []
   );
+
   const cartCtx: CartContextType = {
     foodsInCart,
     addFood: (food) => {
@@ -68,7 +72,23 @@ export const CartProvider = (props: { children: React.ReactNode }) => {
     resetCart: () => {
       foodsInCartDispatcher({ action: "RESET" });
     },
+    getTotalAmount: () => {
+      return foodsInCart
+        .map((food) => food.amount)
+        .reduce((total, amount) => total + amount, 0);
+    },
+    getTotaoPrice: () => {
+      return foodsInCart
+        .map((food) => food.price * food.amount)
+        .reduce((total, price) => total + price, 0)
+        .toFixed(2);
+    },
+    getAmount: (food) => {
+      const duplicateFood = foodsInCart.find((f) => f.id === food.id);
+      return duplicateFood ? duplicateFood.amount : 0;
+    },
   };
+
   return (
     <CartContext.Provider value={cartCtx}>
       {props.children}

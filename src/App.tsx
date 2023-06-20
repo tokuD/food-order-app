@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import Header from "./components/Header";
 import styles from "./App.module.css";
 import Title from "./components/Title";
@@ -34,9 +34,17 @@ const foodList: FoodType[] = [
 ];
 
 function App() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const modalOpenHandler = () => {
+    setModalIsOpen(true);
+  };
+  const modalCloseHandler = () => {
+    setModalIsOpen(false);
+  };
   return (
     <Fragment>
-      <Header />
+      {modalIsOpen && <CartModal modalCloseHandler={modalCloseHandler} />}
+      <Header modalOpenHandler={modalOpenHandler} />
       <main className={styles["main-container"]}>
         <img
           src="/public/meals.jpg"
@@ -46,7 +54,6 @@ function App() {
         <Title />
         <FoodList foods={foodList} />
       </main>
-      <CartModal />
     </Fragment>
   );
 }

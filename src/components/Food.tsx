@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from "react";
-import { FoodType } from "../types/food-type";
 import styles from "./Food.module.css";
 import CartContext from "../context/cart-context";
+import { FoodType } from "../types/food-type";
 
 type Props = {
   food: FoodType;
@@ -37,7 +37,7 @@ const Food = (props: Props) => {
       <div className={styles["amount-container"]}>
         <p>
           <span className={styles.amount}>Amount</span>
-          <span className={styles["amount-tips"]}>{0}</span>
+          <span className={styles["amount-tips"]}>{cartCtx.getAmount(food)}</span>
         </p>
         <button
           className={`${styles["add-button"]} ${styles.button}`}
