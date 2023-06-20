@@ -22,10 +22,23 @@ const CartModal = (props: Props) => {
             <FoodInCart food={food} />
           ))}
         </ul>
-        <p>
-          <span>Total Amount</span>
-          <span>${cartCtx.getTotaoPrice()}</span>
+        <p className={styles["p-container"]}>
+          <span className={styles["total-amount-title"]}>Total Amount</span>
+          <span className={styles["total-amount"]}>
+            ${cartCtx.getTotaoPrice()}
+          </span>
         </p>
+        <div className={styles["button-container"]}>
+          <button
+            className={`${styles.button} ${styles["close-button"]}`}
+            onClick={modalCloseHandler}
+          >
+            Close
+          </button>
+          <button className={`${styles.button} ${styles["order-button"]}`}>
+            Order
+          </button>
+        </div>
       </section>
     </div>
   );

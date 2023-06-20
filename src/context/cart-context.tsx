@@ -33,23 +33,27 @@ const foodsInCartReducer = (
   switch (payload.action) {
     case "ADD":
       if (duplicateFood === undefined) {
-        return [...prev, { ...payload.food, amount: 1 }];
+        return [...prev, { ...payload.food, amount: 1 }].sort((a, b) =>
+          a.id > b.id ? 1 : -1
+        );
       }
       return [
         ...prev.filter((food) => food.id !== duplicateFood.id),
         { ...duplicateFood, amount: duplicateFood.amount + 1 },
-      ];
+      ].sort((a, b) => (a.id > b.id ? 1 : -1));
     case "REMOVE":
       if (duplicateFood === undefined) {
         return prev;
       }
       if (duplicateFood.amount === 1) {
-        return [...prev.filter((food) => food.id !== duplicateFood.id)];
+        return [...prev.filter((food) => food.id !== duplicateFood.id)].sort(
+          (a, b) => (a.id > b.id ? 1 : -1)
+        );
       }
       return [
         ...prev.filter((food) => food.id !== duplicateFood.id),
         { ...duplicateFood, amount: duplicateFood.amount - 1 },
-      ];
+      ].sort((a, b) => (a.id > b.id ? 1 : -1));
     default:
       return prev;
   }

@@ -1,0 +1,4 @@
+.food-container {
+  border-bottom: 3px solid var(--third);
+  margin-bottom: 16px;
+}
