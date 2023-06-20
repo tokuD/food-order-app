@@ -1,11 +1,12 @@
-export type FoodType = {
-  name: string;
-  description: string;
-  price: number;
-};
+import { FoodType } from "./food-type";
 
-export type CartType = {
-  foods: FoodType[];
-  totalPrice: number;
-  totalAmount: number;
-};
+export interface FoodInCartType extends FoodType {
+  amount: number;
+}
+
+export interface CartContextType {
+  foodsInCart: FoodInCartType[];
+  addFood: (food: FoodType) => void;
+  removeFood: (food: FoodType) => void;
+  resetCart: () => void;
+}

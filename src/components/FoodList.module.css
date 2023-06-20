@@ -1,0 +1,9 @@
+.food-list-container {
+  background-color: #eeeeee;
+  padding: 16px 16px;
+  border-radius: 16px;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  height: fit-content;
+  z-index: 1;
+}
