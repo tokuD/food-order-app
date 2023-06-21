@@ -17,7 +17,7 @@ const CartModal = (props: Props) => {
         className={styles["cart-modal-body"]}
         onClick={(event) => event.stopPropagation()}
       >
-        <ul>
+        <ul className={styles['food-container']}>
           {cartCtx.foodsInCart.map((food) => (
             <FoodInCart food={food} />
           ))}
