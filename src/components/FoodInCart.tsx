@@ -23,11 +23,21 @@ const FoodInCart = (props: Props) => {
 
   return (
     <li className={styles["food-container"]}>
-      <h4>{food.name}</h4>
-      <p>{food.price}</p>
-      <span>&times;{food.amount}</span>
-      <button onClick={onRemoveHandler}>&minus;</button>
-      <button onClick={onAddHandler}>+</button>
+      <div className={styles["column-1"]}>
+        <h4 className={styles["food-name"]}>{food.name}</h4>
+        <p className={styles["food-price"]}>${food.price}</p>
+      </div>
+      <div className={styles["column-2"]}>
+        <span className={styles["food-amount"]}>&times;{food.amount}</span>
+      </div>
+      <div className={styles["column-3"]}>
+        <button onClick={onRemoveHandler} className={styles.button}>
+          &minus;
+        </button>
+        <button onClick={onAddHandler} className={styles.button}>
+          +
+        </button>
+      </div>
     </li>
   );
 };

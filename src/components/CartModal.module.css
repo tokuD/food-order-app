@@ -60,3 +60,7 @@
 .button:active {
   transform: scale(0.85);
 }
+
+.food-container {
+  margin-bottom: 16px;
+}
