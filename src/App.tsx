@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import Header from "./components/Header";
 import styles from "./App.module.css";
 import Title from "./components/Title";
@@ -6,35 +6,35 @@ import FoodList from "./components/FoodList";
 import { FoodType } from "./types/food-type";
 import CartModal from "./components/CartModal";
 
-const foodList: FoodType[] = [
-  {
-    id: "m1",
-    name: "Sushi",
-    description: "Finest fish and veggies",
-    price: 22.99,
-  },
-  {
-    id: "m2",
-    name: "Schnitzel",
-    description: "A german specialty!",
-    price: 16.5,
-  },
-  {
-    id: "m3",
-    name: "Barbecue Burger",
-    description: "American, raw, meaty",
-    price: 12.99,
-  },
-  {
-    id: "m4",
-    name: "Green Bowl",
-    description: "Healthy...and green...",
-    price: 18.99,
-  },
-];
+const url = "https://react-http-36f4d-default-rtdb.firebaseio.com/foods.json";
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [foods, setFoods] = useState<FoodType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  const fetchFoods = useCallback(async () => {
+    setIsLoading(true);
+    setHasError(false);
+    const response = await fetch(url);
+    if (response.ok) {
+      const data: FoodType[] = await response.json();
+      setIsLoading(false);
+      return data;
+    } else {
+      setHasError(true);
+      return [];
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetch = async () => {
+      setFoods(await fetchFoods());
+    };
+    fetch();
+  }, [fetchFoods]);
+
   const modalOpenHandler = () => {
     setModalIsOpen(true);
   };
@@ -52,7 +52,7 @@ function App() {
           className={styles["hero-img"]}
         />
         <Title />
-        <FoodList foods={foodList} />
+        <FoodList foods={foods} isLoading={isLoading} hasError={hasError} />
       </main>
     </Fragment>
   );
